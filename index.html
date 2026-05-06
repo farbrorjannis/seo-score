@@ -151,17 +151,28 @@
     <div class="section">
         <div class="section-title">1. Technical Performance</div>
         
-        <div class="tool-card">
-            <div class="tool-header">
-                <span class="tool-name">Google PageSpeed</span>
-                <a href="https://web.dev" target="_blank" class="tool-link">Open →</a>
-            </div>
-            <p class="instruction">Enter the <b>Performance Score</b> (0-100).</p>
-            <div class="input-row">
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-        </div>
+<div class="tool-card">
+    <div class="tool-header">
+        <span class="tool-name">Google PageSpeed Insights</span>
+        <a href="https://web.dev" target="_blank" class="tool-link">Open Tool →</a>
+    </div>
+    <p class="instruction">Enter scores for both views. Google prioritizes <b>Mobile</b> for ranking.</p>
+    
+    <!-- Mobile Input -->
+    <div class="input-row" style="margin-bottom: 15px;">
+        <div style="width: 80px; font-size: 0.8rem; font-weight: 600; color: var(--accent-warm);">MOBILE</div>
+        <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+        <div class="bar-outer"><div class="bar-inner"></div></div>
+    </div>
+
+    <!-- Desktop Input -->
+    <div class="input-row">
+        <div style="width: 80px; font-size: 0.8rem; font-weight: 600; color: var(--accent-warm);">DESKTOP</div>
+        <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+        <div class="bar-outer"><div class="bar-inner"></div></div>
+    </div>
+</div>
+
 
         <div class="tool-card">
             <div class="tool-header">
@@ -199,6 +210,35 @@
             </div>
         </div>
     </div>
+    <!-- Section: Google Search Console -->
+<div class="section">
+    <div class="section-title">Google Search Console Insights</div>
+    
+    <div class="tool-card">
+        <div class="tool-header">
+            <span class="tool-name">Indexing Status</span>
+            <a href="https://google.com" target="_blank" class="tool-link">Open GSC →</a>
+        </div>
+        <p class="instruction">Check Indexing > Pages. What % of your main pages are <b>Indexed</b> (Green)?</p>
+        <div class="input-row">
+            <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+            <div class="bar-outer"><div class="bar-inner"></div></div>
+        </div>
+    </div>
+
+    <div class="tool-card">
+        <div class="tool-header">
+            <span class="tool-name">Core Web Vitals</span>
+            <a href="https://google.com" target="_blank" class="tool-link">Open GSC →</a>
+        </div>
+        <p class="instruction">Experience tab. Enter the % of <b>Good URLs</b> on Mobile.</p>
+        <div class="input-row">
+            <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+            <div class="bar-outer"><div class="bar-inner"></div></div>
+        </div>
+    </div>
+</div>
+
 
     <!-- 2. CONTENT -->
     <div class="section">
