@@ -9,8 +9,8 @@
         :root {
             --bg: #fdfaf6;
             --card: #ffffff;
-            --accent-dark: #5d4037; /* Espresso */
-            --accent-warm: #8b5e3c; /* Latte */
+            --accent-dark: #5d4037;
+            --accent-warm: #8b5e3c;
             --bar-bg: #e0d5c5;
             --text-main: #3e2723;
             --text-dim: #795548;
@@ -26,17 +26,16 @@
             color: var(--text-main);
             margin: 0;
             padding: 10px;
-            font-size: 16px; /* Optimized for mobile readability */
+            font-size: 16px;
             line-height: 1.5;
         }
 
-        .container { max-width: 500px; margin: 0 auto; padding-bottom: 50px; }
+        .container { max-width: 550px; margin: 0 auto; padding-bottom: 50px; }
 
         header { text-align: center; margin: 30px 0; }
         h1 { font-size: 1.8rem; margin: 0; color: var(--accent-dark); letter-spacing: -0.5px; }
-        .branding { font-size: 0.9rem; color: var(--accent-warm); text-decoration: none; font-weight: 600; }
+        .branding { font-size: 0.9rem; color: var(--accent-warm); text-decoration: none; font-weight: 600; display: block; margin-top: 5px; }
 
-        /* Main Score Gauge */
         .main-score-box {
             background: var(--card);
             border-radius: 24px;
@@ -44,112 +43,95 @@
             text-align: center;
             box-shadow: 0 10px 25px rgba(93, 64, 55, 0.05);
             margin-bottom: 25px;
+            position: sticky; top: 10px; z-index: 100;
         }
 
         .gauge-container {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 15px;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
             position: relative;
             background: conic-gradient(var(--accent-warm) calc(var(--p) * 1%), var(--bar-bg) 0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: --p 0.5s;
         }
         .gauge-container::after {
             content: attr(data-val) "%";
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: var(--card);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
         }
 
-        /* Section Styling */
-        .section { margin-bottom: 30px; }
+        .section { margin-bottom: 35px; }
         .section-title { 
             font-size: 1.1rem; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
             color: var(--accent-warm);
             margin-bottom: 15px;
-            padding-left: 5px;
+            padding-left: 10px;
             border-left: 4px solid var(--accent-warm);
         }
 
         .tool-card {
             background: var(--card);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
-        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .tool-name { font-weight: 600; font-size: 1rem; display: block; }
-        .tool-link { font-size: 0.8rem; color: var(--accent-warm); font-weight: 600; text-decoration: none; }
+        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .tool-name { font-weight: 600; font-size: 1rem; color: var(--accent-dark); }
+        .tool-link { font-size: 0.85rem; color: var(--accent-warm); font-weight: 600; text-decoration: underline; }
 
-        .input-row { display: flex; align-items: center; gap: 12px; }
+        .instruction { font-size: 0.85rem; color: var(--text-dim); line-height: 1.3; margin-bottom: 12px; font-style: italic; }
+        .warning { color: var(--red); font-weight: 600; font-style: normal; }
+
+        .input-row { display: flex; align-items: center; gap: 15px; }
         input[type="number"] {
-            width: 75px;
-            padding: 10px;
+            width: 80px;
+            padding: 12px;
             border: 2px solid var(--bar-bg);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             text-align: center;
-            background: var(--bg);
+            background: #fff;
         }
 
         .bar-outer { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
-        .bar-inner { height: 100%; background: var(--accent-warm); width: 0%; transition: width 0.4s; }
+        .bar-inner { height: 100%; background: var(--accent-warm); width: 0%; transition: width 0.5s; }
 
-        /* AI Audit Section */
+        /* AI Buttons */
         .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
         .ai-btn {
             border: 2px solid var(--bar-bg);
-            background: var(--bg);
-            padding: 10px 5px;
-            border-radius: 10px;
+            background: #fff;
+            padding: 12px 5px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            transition: all 0.2s;
         }
         .ai-btn.active-green { background: var(--green); color: white; border-color: var(--green); }
         .ai-btn.active-yellow { background: var(--yellow); color: white; border-color: var(--yellow); }
         .ai-btn.active-red { background: var(--red); color: white; border-color: var(--red); }
 
-        /* Actions */
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px; }
-        button.primary {
-            background: var(--accent-dark);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        button.secondary {
-            background: transparent;
-            border: 2px solid var(--accent-dark);
-            color: var(--accent-dark);
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .optional-toggle { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px; display: block; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 40px; }
+        button.primary { background: var(--accent-dark); color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 600; font-size: 1rem; }
+        button.secondary { background: transparent; border: 2px solid var(--accent-dark); color: var(--accent-dark); padding: 18px; border-radius: 15px; font-weight: 600; }
+        
+        .opt-label { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: var(--accent-dark); }
     </style>
 </head>
 <body>
@@ -162,19 +144,19 @@
 
     <div class="main-score-box">
         <div id="mainGauge" class="gauge-container" data-val="0" style="--p: 0"></div>
-        <h2 id="statusTitle">Ready to analyze?</h2>
-        <p style="font-size: 0.9rem; color: var(--text-dim);">Enter your metrics below to see your digital health.</p>
+        <h2 id="statusTitle" style="margin:0; font-size: 1.3rem;">Let's get started</h2>
     </div>
 
-    <!-- Section 1: Technical -->
+    <!-- 1. TECHNICAL -->
     <div class="section">
-        <div class="section-title">1. Technical SEO</div>
+        <div class="section-title">1. Technical Performance</div>
         
         <div class="tool-card">
             <div class="tool-header">
                 <span class="tool-name">Google PageSpeed</span>
-                <a href="https://web.dev" target="_blank" class="tool-link">Open Tool →</a>
+                <a href="https://web.dev" target="_blank" class="tool-link">Open →</a>
             </div>
+            <p class="instruction">Enter the <b>Performance Score</b> (0-100).</p>
             <div class="input-row">
                 <input type="number" placeholder="0" class="score-input" oninput="calculate()">
                 <div class="bar-outer"><div class="bar-inner"></div></div>
@@ -183,9 +165,34 @@
 
         <div class="tool-card">
             <div class="tool-header">
-                <span class="tool-name">GTmetrix Grade (0-100)</span>
-                <a href="https://gtmetrix.com" target="_blank" class="tool-link">Open Tool →</a>
+                <span class="tool-name">GTmetrix Grade</span>
+                <a href="https://gtmetrix.com" target="_blank" class="tool-link">Open →</a>
             </div>
+            <p class="instruction"><span class="warning">Warning:</span> 3 tests/month. Set server to London/Stockholm & Broadband in settings.</p>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
+            </div>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-header">
+                <span class="tool-name">Pingdom Tools</span>
+                <a href="https://pingdom.com" target="_blank" class="tool-link">Open →</a>
+            </div>
+            <p class="instruction">Enter the <b>Performance Grade</b> (0-100).</p>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
+            </div>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-header">
+                <span class="tool-name">SSL Security (SSL Labs)</span>
+                <a href="https://ssllabs.com" target="_blank" class="tool-link">Open →</a>
+            </div>
+            <p class="instruction">A+=100, A=90, B=75, C=50. Quality of your encryption.</p>
             <div class="input-row">
                 <input type="number" placeholder="0" class="score-input" oninput="calculate()">
                 <div class="bar-outer"><div class="bar-inner"></div></div>
@@ -193,18 +200,17 @@
         </div>
     </div>
 
-    <!-- Section 2: On-Page (Optional WP) -->
+    <!-- 2. CONTENT -->
     <div class="section">
-        <div class="section-title">2. Content & On-Page</div>
-        <label class="optional-toggle">
-            <input type="checkbox" id="wpToggle" onchange="toggleWP()"> I use WordPress (Yoast/RankMath)
+        <div class="section-title">2. On-Page & Content</div>
+        
+        <label class="opt-label">
+            <input type="checkbox" id="wpToggle" onchange="toggleWP()"> I use WordPress
         </label>
         
         <div class="tool-card" id="wpCard" style="display:none;">
-            <div class="tool-header">
-                <span class="tool-name">WP SEO Score (0-100)</span>
-                <span class="tool-link">Yoast / RankMath</span>
-            </div>
+            <span class="tool-name">Yoast / RankMath Score</span>
+            <p class="instruction">Enter your average SEO score from the WP plugin.</p>
             <div class="input-row">
                 <input type="number" placeholder="0" class="score-input wp-input" oninput="calculate()">
                 <div class="bar-outer"><div class="bar-inner"></div></div>
@@ -213,9 +219,10 @@
 
         <div class="tool-card">
             <div class="tool-header">
-                <span class="tool-name">Screaming Frog (Titles %)</span>
-                <a href="https://screamingfrog.co.uk" target="_blank" class="tool-link">Tool →</a>
+                <span class="tool-name">Screaming Frog (Titles)</span>
+                <a href="https://screamingfrog.co.uk" target="_blank" class="tool-link">Download →</a>
             </div>
+            <p class="instruction">Check 'Page Titles' tab. What % are unique and under 60 characters?</p>
             <div class="input-row">
                 <input type="number" placeholder="0" class="score-input" oninput="calculate()">
                 <div class="bar-outer"><div class="bar-inner"></div></div>
@@ -223,127 +230,122 @@
         </div>
     </div>
 
-    <!-- Section 3: AI Audit -->
+    <!-- 3. LINKS -->
     <div class="section">
-        <div class="section-title">3. AI Visibility Audit</div>
-        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Ask: "Who is [Your Brand]?"</p>
+        <div class="section-title">3. Link Health & Authority</div>
         
         <div class="tool-card">
-            <span class="tool-name">ChatGPT / Perplexity / Gemini</span>
+            <div class="tool-header">
+                <span class="tool-name">Authority (Ahrefs/Moz)</span>
+                <a href="https://ahrefs.com" target="_blank" class="tool-link">Check DR →</a>
+            </div>
+            <p class="instruction">Enter your Domain Rating (DR) or Authority (DA).</p>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
+            </div>
+        </div>
+
+        <div class="tool-card">
+            <span class="tool-name">Link Health (In & Out)</span>
+            <p class="instruction">Do you have 5+ backlinks AND link out to partners? (0-100)</p>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. AI AUDIT -->
+    <div class="section">
+        <div class="section-title">4. AI Visibility Audit</div>
+        <p class="instruction">Ask ChatGPT/Gemini/Perplexity: "Who is [Brand]?"</p>
+        
+        <div class="tool-card">
+            <span class="tool-name">AI Recognition Response</span>
             <div class="ai-grid">
-                <button class="ai-btn" onclick="setAI(this, 100)">Recognized 🟢</button>
+                <button class="ai-btn" onclick="setAI(this, 100)">Known 🟢</button>
                 <button class="ai-btn" onclick="setAI(this, 50)">Vague 🟡</button>
                 <button class="ai-btn" onclick="setAI(this, 0)">Unknown 🔴</button>
             </div>
-            <input type="hidden" class="score-input ai-hidden-val" value="0">
+            <input type="hidden" class="score-input ai-hidden" value="0">
         </div>
     </div>
 
     <div class="actions">
         <button class="primary" onclick="exportCSV()">Export CSV</button>
-        <button class="secondary" onclick="clearData()">Reset</button>
+        <button class="secondary" onclick="clearData()">Reset All</button>
     </div>
 </div>
 
 <script>
-    // Toggle WordPress section
     function toggleWP() {
-        const wpCard = document.getElementById('wpCard');
-        wpCard.style.display = document.getElementById('wpToggle').checked ? 'block' : 'none';
+        document.getElementById('wpCard').style.display = document.getElementById('wpToggle').checked ? 'block' : 'none';
         calculate();
     }
 
-    // Handle AI buttons
     function setAI(btn, val) {
         const parent = btn.parentElement;
         parent.querySelectorAll('.ai-btn').forEach(b => b.className = 'ai-btn');
-        
         if(val === 100) btn.classList.add('active-green');
         else if(val === 50) btn.classList.add('active-yellow');
         else btn.classList.add('active-red');
-        
         parent.nextElementSibling.value = val;
         calculate();
     }
 
-    // Core Calculation Logic
     function calculate() {
         const inputs = document.querySelectorAll('.score-input');
-        let total = 0;
-        let count = 0;
+        let total = 0, count = 0;
 
         inputs.forEach(input => {
-            // Skip hidden WP input if toggle is off
             if(input.classList.contains('wp-input') && !document.getElementById('wpToggle').checked) return;
-            
             let val = parseFloat(input.value) || 0;
             if(val > 100) val = 100;
-            
-            // Update individual bar
             const bar = input.parentElement.querySelector('.bar-inner');
             if(bar) bar.style.width = val + '%';
-            
             total += val;
             count++;
         });
 
-        const finalScore = count > 0 ? Math.round(total / count) : 0;
-        
-        // Update Main Gauge
+        const final = count > 0 ? Math.round(total / count) : 0;
         const gauge = document.getElementById('mainGauge');
-        gauge.style.setProperty('--p', finalScore);
-        gauge.setAttribute('data-val', finalScore);
+        gauge.style.setProperty('--p', final);
+        gauge.setAttribute('data-val', final);
 
-        // Update Status Text
-        const statusTitle = document.getElementById('statusTitle');
-        if(finalScore === 0) statusTitle.innerText = "Start your audit";
-        else if(finalScore < 50) statusTitle.innerText = "Needs Coffee & Work";
-        else if(finalScore < 85) statusTitle.innerText = "Looking Good!";
-        else statusTitle.innerText = "SEO Rockstar!";
-
-        // Save to LocalStorage
-        saveData();
-    }
-
-    function saveData() {
-        const data = Array.from(document.querySelectorAll('.score-input')).map(i => i.value);
-        localStorage.setItem('seo_audit_data', JSON.stringify(data));
-    }
-
-    function loadData() {
-        const saved = JSON.parse(localStorage.getItem('seo_audit_data'));
-        if(saved) {
-            const inputs = document.querySelectorAll('.score-input');
-            saved.forEach((val, i) => { if(inputs[i]) inputs[i].value = val; });
-            calculate();
-        }
+        const status = document.getElementById('statusTitle');
+        if(final === 0) status.innerText = "Start your audit";
+        else if(final < 50) status.innerText = "Needs Attention";
+        else if(final < 85) status.innerText = "Great Progress!";
+        else status.innerText = "SEO & AI Master!";
+        
+        localStorage.setItem('audit_v2', JSON.stringify(Array.from(inputs).map(i => i.value)));
     }
 
     function exportCSV() {
-        let csv = "Tool,Score\n";
-        document.querySelectorAll('.tool-card').forEach(card => {
-            const name = card.querySelector('.tool-name').innerText;
-            const score = card.querySelector('.score-input').value || 0;
+        let csv = "Metric,Score\n";
+        document.querySelectorAll('.tool-card').forEach(c => {
+            const name = c.querySelector('.tool-name').innerText;
+            const score = c.querySelector('.score-input').value || 0;
             csv += `${name},${score}\n`;
         });
-        
         const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.setAttribute('href', url);
-        a.setAttribute('download', `seo-audit-${new Date().toISOString().split('T')[0]}.csv`);
+        a.href = URL.createObjectURL(blob);
+        a.download = `seo-report-${new Date().toISOString().split('T')[0]}.csv`;
         a.click();
     }
 
-    function clearData() {
-        if(confirm("Clear all data?")) {
-            localStorage.removeItem('seo_audit_data');
-            location.reload();
+    function clearData() { if(confirm("Reset all?")) { localStorage.clear(); location.reload(); } }
+
+    window.onload = () => {
+        const saved = JSON.parse(localStorage.getItem('audit_v2'));
+        if(saved) {
+            const inputs = document.querySelectorAll('.score-input');
+            saved.forEach((v, i) => { if(inputs[i]) inputs[i].value = v; });
+            calculate();
         }
-    }
-
-    window.onload = loadData;
+    };
 </script>
-
 </body>
 </html>
