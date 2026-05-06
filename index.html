@@ -1,132 +1,155 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEO & AI Scorecard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SEO & AI Scorecard | akvarellskiss.se</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
             --bg: #fdfaf6;
             --card: #ffffff;
-            --accent: #8b5e3c;
-            --text: #333333;
-            --text-dim: #666666;
-            --bar: #e0d5c5;
+            --accent-dark: #5d4037; /* Espresso */
+            --accent-warm: #8b5e3c; /* Latte */
+            --bar-bg: #e0d5c5;
+            --text-main: #3e2723;
+            --text-dim: #795548;
+            --green: #6d8c54;
+            --yellow: #d4a373;
+            --red: #bc4749;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
             padding: 10px;
-            font-size: 16px;
+            font-size: 16px; /* Optimized for mobile readability */
+            line-height: 1.5;
         }
 
-        .container { max-width: 550px; margin: 0 auto; }
+        .container { max-width: 500px; margin: 0 auto; padding-bottom: 50px; }
 
-        header { text-align: center; margin: 20px 0; }
-        h1 { font-size: 1.6rem; color: var(--accent); margin: 0; }
-        .subtitle { font-size: 0.9rem; color: var(--text-dim); }
+        header { text-align: center; margin: 30px 0; }
+        h1 { font-size: 1.8rem; margin: 0; color: var(--accent-dark); letter-spacing: -0.5px; }
+        .branding { font-size: 0.9rem; color: var(--accent-warm); text-decoration: none; font-weight: 600; }
 
-        /* Huvudmätare */
-        .main-score-card {
+        /* Main Score Gauge */
+        .main-score-box {
             background: var(--card);
             border-radius: 24px;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(139, 94, 60, 0.1);
-            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(93, 64, 55, 0.05);
+            margin-bottom: 25px;
         }
 
-        .gauge {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--bar) 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .gauge-container {
+            width: 140px;
+            height: 140px;
             margin: 0 auto 15px;
             position: relative;
-        }
-        .gauge::after {
-            content: attr(data-val) "/100";
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: white;
+            background: conic-gradient(var(--accent-warm) calc(var(--p) * 1%), var(--bar-bg) 0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.4rem;
+            transition: --p 0.5s;
         }
-
-        /* Sektioner */
-        .section-card {
+        .gauge-container::after {
+            content: attr(data-val) "%";
+            position: absolute;
+            width: 120px;
+            height: 120px;
             background: var(--card);
-            border-radius: 18px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0,0,0,0.03);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Section Styling */
+        .section { margin-bottom: 30px; }
+        .section-title { 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: var(--accent-warm);
             margin-bottom: 15px;
+            padding-left: 5px;
+            border-left: 4px solid var(--accent-warm);
         }
 
-        h2 { font-size: 1.1rem; margin: 0; color: var(--accent); }
-        .points-badge { font-weight: 600; color: var(--accent); }
-
-        /* Tool rader */
-        .tool-row {
-            background: #faf8f6;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 8px;
+        .tool-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
-        .tool-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
+        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .tool-name { font-weight: 600; font-size: 1rem; display: block; }
+        .tool-link { font-size: 0.8rem; color: var(--accent-warm); font-weight: 600; text-decoration: none; }
 
-        .tool-name { font-weight: 600; font-size: 0.95rem; }
-        .tool-link { font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: 600; }
-
-        .input-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        input {
-            width: 70px;
-            padding: 8px;
-            border: 2px solid var(--bar);
-            border-radius: 8px;
-            text-align: center;
+        .input-row { display: flex; align-items: center; gap: 12px; }
+        input[type="number"] {
+            width: 75px;
+            padding: 10px;
+            border: 2px solid var(--bar-bg);
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
+            text-align: center;
+            background: var(--bg);
         }
 
-        .bar-bg { flex: 1; height: 8px; background: var(--bar); border-radius: 4px; overflow: hidden; }
-        .bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        .bar-outer { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
+        .bar-inner { height: 100%; background: var(--accent-warm); width: 0%; transition: width 0.4s; }
 
-        .label { font-size: 0.85rem; color: var(--text-dim); }
-
-        @media (max-width: 480px) {
-            body { padding: 5px; }
+        /* AI Audit Section */
+        .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+        .ai-btn {
+            border: 2px solid var(--bar-bg);
+            background: var(--bg);
+            padding: 10px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        .ai-btn.active-green { background: var(--green); color: white; border-color: var(--green); }
+        .ai-btn.active-yellow { background: var(--yellow); color: white; border-color: var(--yellow); }
+        .ai-btn.active-red { background: var(--red); color: white; border-color: var(--red); }
+
+        /* Actions */
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px; }
+        button.primary {
+            background: var(--accent-dark);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button.secondary {
+            background: transparent;
+            border: 2px solid var(--accent-dark);
+            color: var(--accent-dark);
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .optional-toggle { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
@@ -134,152 +157,192 @@
 <div class="container">
     <header>
         <h1>SEO & AI Scorecard</h1>
-        <p class="subtitle">Fyll i dina värden från gratisverktygen nedan</p>
+        <a href="https://akvarellskiss.se" target="_blank" class="branding">A free tool from akvarellskiss.se</a>
     </header>
 
-    <!-- Huvudpoäng -->
-    <div class="main-score-card">
-        <div id="mainGauge" class="gauge" data-val="0" style="--p: 0"></div>
-        <h2 id="ratingText">Börja mata in dina värden</h2>
-        <p class="label">Totalpoäng baserat på din analys</p>
+    <div class="main-score-box">
+        <div id="mainGauge" class="gauge-container" data-val="0" style="--p: 0"></div>
+        <h2 id="statusTitle">Ready to analyze?</h2>
+        <p style="font-size: 0.9rem; color: var(--text-dim);">Enter your metrics below to see your digital health.</p>
     </div>
 
-    <!-- 1. Technical SEO -->
-    <div class="section-card">
-        <div class="section-header">
-            <h2>1. Technical SEO</h2>
-            <span class="points-badge"><span id="s1-pts">0</span>/20</span>
-        </div>
+    <!-- Section 1: Technical -->
+    <div class="section">
+        <div class="section-title">1. Technical SEO</div>
         
-        <div class="tool-row">
-            <div class="tool-info">
+        <div class="tool-card">
+            <div class="tool-header">
                 <span class="tool-name">Google PageSpeed</span>
-                <a href="https://web.dev" target="_blank" class="tool-link">Öppna tool →</a>
+                <a href="https://web.dev" target="_blank" class="tool-link">Open Tool →</a>
             </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.05">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
             </div>
-            <span class="label">Performance Score (0-100)</span>
         </div>
 
-        <div class="tool-row">
-            <div class="tool-info">
-                <span class="tool-name">Google Mobile-Friendly</span>
-                <a href="https://google.com" target="_blank" class="tool-link">Öppna tool →</a>
+        <div class="tool-card">
+            <div class="tool-header">
+                <span class="tool-name">GTmetrix Grade (0-100)</span>
+                <a href="https://gtmetrix.com" target="_blank" class="tool-link">Open Tool →</a>
             </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.05">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
             </div>
-            <span class="label">Pass = 100, Fail = 0</span>
         </div>
     </div>
 
-    <!-- 2. On-Page & Content -->
-    <div class="section-card">
-        <div class="section-header">
-            <h2>2. On-Page & Content</h2>
-            <span class="points-badge"><span id="s2-pts">0</span>/25</span>
+    <!-- Section 2: On-Page (Optional WP) -->
+    <div class="section">
+        <div class="section-title">2. Content & On-Page</div>
+        <label class="optional-toggle">
+            <input type="checkbox" id="wpToggle" onchange="toggleWP()"> I use WordPress (Yoast/RankMath)
+        </label>
+        
+        <div class="tool-card" id="wpCard" style="display:none;">
+            <div class="tool-header">
+                <span class="tool-name">WP SEO Score (0-100)</span>
+                <span class="tool-link">Yoast / RankMath</span>
+            </div>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input wp-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
+            </div>
         </div>
-        <div class="tool-row">
-            <div class="tool-info">
-                <span class="tool-name">Screaming Frog (Titles)</span>
-                <a href="https://screamingfrog.co.uk" target="_blank" class="tool-link">Ladda ner →</a>
+
+        <div class="tool-card">
+            <div class="tool-header">
+                <span class="tool-name">Screaming Frog (Titles %)</span>
+                <a href="https://screamingfrog.co.uk" target="_blank" class="tool-link">Tool →</a>
             </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.05">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
+            <div class="input-row">
+                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
+                <div class="bar-outer"><div class="bar-inner"></div></div>
             </div>
-            <span class="label">% pages with correct titles</span>
-        </div>
-        <div class="tool-row">
-            <div class="tool-info">
-                <span class="tool-name">Content Quality</span>
-                <span class="label">Manual check</span>
-            </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.10">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
-            </div>
-            <span class="label">Uniqueness & Depth (0-100)</span>
         </div>
     </div>
 
-    <!-- 3. Backlinks -->
-    <div class="section-card">
-        <div class="section-header">
-            <h2>3. Backlinks</h2>
-            <span class="points-badge"><span id="s3-pts">0</span>/20</span>
-        </div>
-        <div class="tool-row">
-            <div class="tool-info">
-                <span class="tool-name">Ahrefs DR (Free)</span>
-                <a href="https://ahrefs.com" target="_blank" class="tool-link">Öppna →</a>
+    <!-- Section 3: AI Audit -->
+    <div class="section">
+        <div class="section-title">3. AI Visibility Audit</div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">Ask: "Who is [Your Brand]?"</p>
+        
+        <div class="tool-card">
+            <span class="tool-name">ChatGPT / Perplexity / Gemini</span>
+            <div class="ai-grid">
+                <button class="ai-btn" onclick="setAI(this, 100)">Recognized 🟢</button>
+                <button class="ai-btn" onclick="setAI(this, 50)">Vague 🟡</button>
+                <button class="ai-btn" onclick="setAI(this, 0)">Unknown 🔴</button>
             </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.10">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
-            </div>
-            <span class="label">Domain Rating (0-100)</span>
+            <input type="hidden" class="score-input ai-hidden-val" value="0">
         </div>
     </div>
 
-    <!-- 4. UX -->
-    <div class="section-card">
-        <div class="section-header">
-            <h2>4. User Experience</h2>
-            <span class="points-badge"><span id="s4-pts">0</span>/15</span>
-        </div>
-        <div class="tool-row">
-            <div class="tool-info">
-                <span class="tool-name">Core Web Vitals</span>
-                <a href="https://google.com" target="_blank" class="tool-link">GSC →</a>
-            </div>
-            <div class="input-area">
-                <input type="number" placeholder="0" oninput="calc()" class="val-input" data-weight="0.10">
-                <div class="bar-bg"><div class="bar-fill"></div></div>
-            </div>
-            <span class="label">% Good URLs</span>
-        </div>
+    <div class="actions">
+        <button class="primary" onclick="exportCSV()">Export CSV</button>
+        <button class="secondary" onclick="clearData()">Reset</button>
     </div>
-
 </div>
 
 <script>
-    function calc() {
-        let total = 0;
-        const inputs = document.querySelectorAll('.val-input');
+    // Toggle WordPress section
+    function toggleWP() {
+        const wpCard = document.getElementById('wpCard');
+        wpCard.style.display = document.getElementById('wpToggle').checked ? 'block' : 'none';
+        calculate();
+    }
+
+    // Handle AI buttons
+    function setAI(btn, val) {
+        const parent = btn.parentElement;
+        parent.querySelectorAll('.ai-btn').forEach(b => b.className = 'ai-btn');
         
+        if(val === 100) btn.classList.add('active-green');
+        else if(val === 50) btn.classList.add('active-yellow');
+        else btn.classList.add('active-red');
+        
+        parent.nextElementSibling.value = val;
+        calculate();
+    }
+
+    // Core Calculation Logic
+    function calculate() {
+        const inputs = document.querySelectorAll('.score-input');
+        let total = 0;
+        let count = 0;
+
         inputs.forEach(input => {
+            // Skip hidden WP input if toggle is off
+            if(input.classList.contains('wp-input') && !document.getElementById('wpToggle').checked) return;
+            
             let val = parseFloat(input.value) || 0;
             if(val > 100) val = 100;
             
-            // Uppdatera stapeln bredvid inputen
-            const bar = input.parentElement.querySelector('.bar-fill');
-            bar.style.width = val + '%';
+            // Update individual bar
+            const bar = input.parentElement.querySelector('.bar-inner');
+            if(bar) bar.style.width = val + '%';
             
-            // Räkna viktat poäng (t.ex. 100 poäng * 0.05 vikt = 5 poäng)
-            const weight = parseFloat(input.getAttribute('data-weight'));
-            total += val * weight;
+            total += val;
+            count++;
         });
 
-        // Uppdatera huvudklockan
-        const finalScore = Math.round(total);
+        const finalScore = count > 0 ? Math.round(total / count) : 0;
+        
+        // Update Main Gauge
         const gauge = document.getElementById('mainGauge');
         gauge.style.setProperty('--p', finalScore);
         gauge.setAttribute('data-val', finalScore);
 
-        // Uppdatera text baserat på poäng
-        let txt = "Dags att börja!";
-        if(finalScore > 0) txt = "Behöver kärlek";
-        if(finalScore > 50) txt = "Bra på gång!";
-        if(finalScore > 80) txt = "Riktigt proffsigt!";
-        document.getElementById('ratingText').innerText = txt;
-        
-        // Uppdatera sektions-badges (simpler version för demo)
-        document.getElementById('s1-pts').innerText = Math.round(total * 0.4); // Exempel
+        // Update Status Text
+        const statusTitle = document.getElementById('statusTitle');
+        if(finalScore === 0) statusTitle.innerText = "Start your audit";
+        else if(finalScore < 50) statusTitle.innerText = "Needs Coffee & Work";
+        else if(finalScore < 85) statusTitle.innerText = "Looking Good!";
+        else statusTitle.innerText = "SEO Rockstar!";
+
+        // Save to LocalStorage
+        saveData();
     }
+
+    function saveData() {
+        const data = Array.from(document.querySelectorAll('.score-input')).map(i => i.value);
+        localStorage.setItem('seo_audit_data', JSON.stringify(data));
+    }
+
+    function loadData() {
+        const saved = JSON.parse(localStorage.getItem('seo_audit_data'));
+        if(saved) {
+            const inputs = document.querySelectorAll('.score-input');
+            saved.forEach((val, i) => { if(inputs[i]) inputs[i].value = val; });
+            calculate();
+        }
+    }
+
+    function exportCSV() {
+        let csv = "Tool,Score\n";
+        document.querySelectorAll('.tool-card').forEach(card => {
+            const name = card.querySelector('.tool-name').innerText;
+            const score = card.querySelector('.score-input').value || 0;
+            csv += `${name},${score}\n`;
+        });
+        
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('download', `seo-audit-${new Date().toISOString().split('T')[0]}.csv`);
+        a.click();
+    }
+
+    function clearData() {
+        if(confirm("Clear all data?")) {
+            localStorage.removeItem('seo_audit_data');
+            location.reload();
+        }
+    }
+
+    window.onload = loadData;
 </script>
 
 </body>
