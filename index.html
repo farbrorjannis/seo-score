@@ -7,140 +7,38 @@
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --bg: #fdfaf6;
-            --card: #ffffff;
-            --accent-dark: #5d4037;
-            --accent-warm: #8b5e3c;
-            --bar-bg: #e0d5c5;
-            --text-main: #3e2723;
-            --text-dim: #795548;
-            --green: #6d8c54;
-            --yellow: #d4a373;
-            --red: #bc4749;
+            --bg: #fdfaf6; --card: #ffffff; --accent-dark: #5d4037; --accent-warm: #8b5e3c;
+            --bar-bg: #e0d5c5; --text-main: #3e2723; --text-dim: #795548;
+            --green: #6d8c54; --yellow: #d4a373; --red: #bc4749;
         }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            margin: 0;
-            padding: 10px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text-main); margin: 0; padding: 10px; font-size: 16px; line-height: 1.5; }
         .container { max-width: 550px; margin: 0 auto; padding-bottom: 50px; }
-
         header { text-align: center; margin: 30px 0; }
         h1 { font-size: 1.8rem; margin: 0; color: var(--accent-dark); letter-spacing: -0.5px; }
-        .branding { font-size: 0.9rem; color: var(--accent-warm); text-decoration: none; font-weight: 600; display: block; margin-top: 5px; }
-
-        .main-score-box {
-            background: var(--card);
-            border-radius: 24px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(93, 64, 55, 0.05);
-            margin-bottom: 25px;
-            position: sticky; top: 10px; z-index: 100;
-        }
-
-        .gauge-container {
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 10px;
-            position: relative;
-            background: conic-gradient(var(--accent-warm) calc(var(--p) * 1%), var(--bar-bg) 0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .gauge-container::after {
-            content: attr(data-val) "%";
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            background: var(--card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
+        .branding { font-size: 0.9rem; color: var(--accent-warm); font-weight: 600; display: block; margin-top: 5px; text-decoration: none; }
+        .main-score-box { background: var(--card); border-radius: 24px; padding: 25px; text-align: center; box-shadow: 0 10px 25px rgba(93, 64, 55, 0.05); margin-bottom: 25px; position: sticky; top: 10px; z-index: 100; }
+        .gauge-container { width: 110px; height: 110px; margin: 0 auto 10px; position: relative; background: conic-gradient(var(--accent-warm) calc(var(--p) * 1%), var(--bar-bg) 0); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .gauge-container::after { content: attr(data-val) "%"; position: absolute; width: 90px; height: 90px; background: var(--card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 600; }
         .section { margin-bottom: 35px; }
-        .section-title { 
-            font-size: 1.1rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: var(--accent-warm);
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 4px solid var(--accent-warm);
-        }
-
-        .tool-card {
-            background: var(--card);
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+        .section-title { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-warm); margin-bottom: 15px; padding-left: 10px; border-left: 4px solid var(--accent-warm); }
+        .tool-card { background: var(--card); border-radius: 18px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 10px; }
         .tool-name { font-weight: 600; font-size: 1rem; color: var(--accent-dark); }
-        .btn-link { 
-            background: var(--accent-warm); 
-            color: white; 
-            padding: 8px 14px; 
-            border-radius: 10px; 
-            font-size: 0.85rem; 
-            text-decoration: none; 
-            font-weight: 600;
-        }
-
+        .btn-link { background: var(--accent-warm); color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; text-decoration: none; font-weight: 600; }
         .instruction { font-size: 0.85rem; color: var(--text-dim); line-height: 1.3; margin-bottom: 12px; }
-        .warning { color: var(--red); font-weight: 600; }
-
-        .input-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .view-label { width: 85px; font-size: 0.75rem; font-weight: 600; color: var(--accent-warm); text-transform: uppercase; }
-        
-        input[type="number"] {
-            width: 75px;
-            padding: 12px;
-            border: 2px solid var(--bar-bg);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            background: #fff;
-        }
-
+        .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .view-label { width: 85px; font-size: 0.7rem; font-weight: 600; color: var(--accent-warm); text-transform: uppercase; }
+        input[type="number"] { width: 75px; padding: 10px; border: 2px solid var(--bar-bg); border-radius: 10px; font-size: 1rem; font-weight: 600; text-align: center; }
         .bar-outer { flex: 1; height: 10px; background: var(--bar-bg); border-radius: 5px; overflow: hidden; }
         .bar-inner { height: 100%; background: var(--accent-warm); width: 0%; transition: width 0.5s; }
-
         .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-        .ai-btn {
-            border: 2px solid var(--bar-bg);
-            background: #fff;
-            padding: 12px 5px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
+        .ai-btn { border: 2px solid var(--bar-bg); background: #fff; padding: 12px 5px; border-radius: 12px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
         .ai-btn.active-green { background: var(--green); color: white; border-color: var(--green); }
         .ai-btn.active-yellow { background: var(--yellow); color: white; border-color: var(--yellow); }
         .ai-btn.active-red { background: var(--red); color: white; border-color: var(--red); }
-
         .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 40px; }
-        button.download-btn { background: var(--accent-dark); color: white; border: none; padding: 22px; border-radius: 18px; font-weight: 600; font-size: 1.1rem; cursor: pointer; width: 100%; }
-        button.reset-btn { background: transparent; border: 2px solid #ddd; color: #999; padding: 12px; border-radius: 15px; font-size: 0.9rem; cursor: pointer; margin-top: 20px; width: 100%; }
-        
-        .opt-label { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: var(--accent-dark); cursor: pointer; }
+        button.download-btn { background: var(--accent-dark); color: white; border: none; padding: 20px; border-radius: 15px; font-weight: 600; font-size: 1rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -159,57 +57,31 @@
     <!-- 1. TECHNICAL PERFORMANCE -->
     <div class="section">
         <div class="section-title">1. Technical Performance</div>
-        
         <div class="tool-card">
             <div class="tool-header">
                 <span class="tool-name">PageSpeed Insights</span>
-                <a href="https://web.dev" target="_blank" class="btn-link">Open PSI</a>
+                <a href="https://web.dev" target="_blank" class="btn-link">Open PSI</a> <!-- URL: BYT OM BEHÖVS -->
             </div>
-            <p class="instruction">Enter scores from the tool. <b>Mobile</b> is most important for Google.</p>
-            <div class="input-row">
-                <div class="view-label">Mobile</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-            <div class="input-row">
-                <div class="view-label">Desktop</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
+            <div class="input-row"><div class="view-label">Mobile</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Desktop</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
         </div>
-
         <div class="tool-card">
             <div class="tool-header">
                 <span class="tool-name">GTmetrix & Pingdom</span>
                 <div style="display:flex; gap:5px;">
-                    <a href="https://gtmetrix.com" target="_blank" class="btn-link">GTmetrix</a>
-                    <a href="https://pingdom.com" target="_blank" class="btn-link">Pingdom</a>
+                    <a href="https://gtmetrix.com" target="_blank" class="btn-link">GTmetrix</a> <!-- URL: BYT OM BEHÖVS -->
+                    <a href="https://pingdom.com" target="_blank" class="btn-link">Pingdom</a> <!-- URL: BYT OM BEHÖVS -->
                 </div>
             </div>
-            <p class="instruction"><span class="warning">GTmetrix:</span> Limited tests. Select server in London/Stockholm.</p>
-            <div class="input-row">
-                <div class="view-label">GT Grade</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-            <div class="input-row">
-                <div class="view-label">Pingdom</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
+            <div class="input-row"><div class="view-label">GT Grade</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Speed</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
         </div>
-
         <div class="tool-card">
             <div class="tool-header">
                 <span class="tool-name">Security (SSL Labs)</span>
-                <a href="https://ssllabs.com" target="_blank" class="btn-link">SSL Test</a>
+                <a href="https://ssllabs.com" target="_blank" class="btn-link">SSL Test</a> <!-- URL: BYT OM BEHÖVS -->
             </div>
-            <p class="instruction">Enter score for encryption: A+=100, A=90, B=75, C=50.</p>
-            <div class="input-row">
-                <div class="view-label">SSL Score</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
+            <div class="input-row"><div class="view-label">SSL Score</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
         </div>
     </div>
 
@@ -218,79 +90,52 @@
         <div class="section-title">2. Google Search Console</div>
         <div class="tool-card">
             <div class="tool-header">
-                <span class="tool-name">Indexing & Core Vitals</span>
+                <span class="tool-name">GSC Metrics</span>
                 <div style="display:flex; gap:5px;">
-                    <a href="https://google.com" target="_blank" class="btn-link">Index</a>
-                    <a href="https://google.com" target="_blank" class="btn-link">Vitals</a>
+                    <a href="https://google.com" target="_blank" class="btn-link">Index</a> <!-- URL: BYT OM BEHÖVS -->
+                    <a href="https://google.com" target="_blank" class="btn-link">Vitals</a> <!-- URL: BYT OM BEHÖVS -->
                 </div>
             </div>
-            <p class="instruction">Check your actual Google data. Enter % of Indexed pages and Good URLs.</p>
-            <div class="input-row">
-                <div class="view-label">Indexed %</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-            <div class="input-row">
-                <div class="view-label">Good URLs</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
+            <div class="input-row"><div class="view-label">Indexed %</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Good URLs</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">CTR %</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Sitemap</div><input type="number" class="score-input" oninput="calculate()" placeholder="0/100"><div class="bar-outer"><div class="bar-inner"></div></div></div>
         </div>
     </div>
 
-    <!-- 3. CONTENT & LINKS -->
+    <!-- 3. CONTENT & ON-PAGE -->
     <div class="section">
-        <div class="section-title">3. Content & Authority</div>
-        <label class="opt-label"><input type="checkbox" id="wpToggle" onchange="toggleWP()"> I use WordPress (Yoast/RankMath)</label>
-        
-        <div class="tool-card" id="wpCard" style="display:none;">
-            <span class="tool-name">WP SEO Plugin Score</span>
-            <div class="input-row">
-                <div class="view-label">Score</div>
-                <input type="number" placeholder="0" class="score-input wp-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-        </div>
-
+        <div class="section-title">3. Content & On-Page</div>
         <div class="tool-card">
             <div class="tool-header">
-                <span class="tool-name">Screaming Frog (Titles)</span>
-                <a href="https://screamingfrog.co.uk" target="_blank" class="btn-link">Download</a>
+                <span class="tool-name">Screaming Frog</span>
+                <a href="https://screamingfrog.co.uk" target="_blank" class="btn-link">Download</a> <!-- URL: BYT OM BEHÖVS -->
             </div>
-            <p class="instruction">Check 'Page Titles'. What % are unique and under 60 characters?</p>
-            <div class="input-row">
-                <div class="view-label">Titles %</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-        </div>
-
-        <div class="tool-card">
-            <div class="tool-header">
-                <span class="tool-name">Authority & Links</span>
-                <div style="display:flex; gap:5px;">
-                    <a href="https://ahrefs.com" target="_blank" class="btn-link">Ahrefs</a>
-                    <a href="https://moz.com" target="_blank" class="btn-link">Moz</a>
-                </div>
-            </div>
-            <p class="instruction">Enter DR/DA and evaluate link health (Partner links in/out).</p>
-            <div class="input-row">
-                <div class="view-label">Authority</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
-            <div class="input-row">
-                <div class="view-label">Health</div>
-                <input type="number" placeholder="0" class="score-input" oninput="calculate()">
-                <div class="bar-outer"><div class="bar-inner"></div></div>
-            </div>
+            <div class="input-row"><div class="view-label">Titles %</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">H1 Tags %</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Meta %</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
         </div>
     </div>
 
-    <!-- 4. AI AUDIT -->
+    <!-- 4. AUTHORITY & LINKS -->
     <div class="section">
-        <div class="section-title">4. AI Visibility Audit</div>
-        <p class="instruction">Ask ChatGPT/Gemini/Perplexity: "Who is [Your Brand]?"</p>
+        <div class="section-title">4. Authority & Links</div>
+        <div class="tool-card">
+            <div class="tool-header">
+                <span class="tool-name">Moz & Ahrefs</span>
+                <div style="display:flex; gap:5px;">
+                    <a href="https://ahrefs.com" target="_blank" class="btn-link">Ahrefs</a> <!-- URL: BYT OM BEHÖVS -->
+                    <a href="https://moz.com" target="_blank" class="btn-link">Moz</a> <!-- URL: BYT OM BEHÖVS -->
+                </div>
+            </div>
+            <div class="input-row"><div class="view-label">Rating/DA</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+            <div class="input-row"><div class="view-label">Link Health</div><input type="number" class="score-input" oninput="calculate()"><div class="bar-outer"><div class="bar-inner"></div></div></div>
+        </div>
+    </div>
+
+    <!-- 5. AI AUDIT -->
+    <div class="section">
+        <div class="section-title">5. AI Visibility Audit</div>
         <div class="tool-card">
             <span class="tool-name">AI Recognition</span>
             <div class="ai-grid">
@@ -298,22 +143,17 @@
                 <button class="ai-btn" onclick="setAI(this, 50)">Vague 🟡</button>
                 <button class="ai-btn" onclick="setAI(this, 0)">Unknown 🔴</button>
             </div>
-            <input type="hidden" class="score-input ai-hidden" value="0">
+            <input type="hidden" class="score-input" value="0">
         </div>
     </div>
 
     <div class="actions">
         <button class="download-btn" onclick="exportReport()">Download Full Report (.txt)</button>
-        <button class="reset-btn" onclick="clearData()">Reset Dashboard</button>
+        <button onclick="localStorage.clear(); location.reload();" style="margin-top:15px; background:none; border:none; color:#999; cursor:pointer;">Reset All Data</button>
     </div>
 </div>
 
 <script>
-    function toggleWP() {
-        document.getElementById('wpCard').style.display = document.getElementById('wpToggle').checked ? 'block' : 'none';
-        calculate();
-    }
-
     function setAI(btn, val) {
         const parent = btn.parentElement;
         parent.querySelectorAll('.ai-btn').forEach(b => b.className = 'ai-btn');
@@ -328,53 +168,33 @@
         const inputs = document.querySelectorAll('.score-input');
         let total = 0, count = 0;
         inputs.forEach(input => {
-            if(input.classList.contains('wp-input') && !document.getElementById('wpToggle').checked) return;
             let val = parseFloat(input.value) || 0;
             if(val > 100) val = 100;
             const bar = input.parentElement.querySelector('.bar-inner');
             if(bar) bar.style.width = val + '%';
-            total += val;
-            count++;
+            total += val; count++;
         });
         const final = count > 0 ? Math.round(total / count) : 0;
         const gauge = document.getElementById('mainGauge');
         gauge.style.setProperty('--p', final);
         gauge.setAttribute('data-val', final);
         const status = document.getElementById('statusTitle');
-        if(final === 0) status.innerText = "Start Analysis";
-        else if(final < 50) status.innerText = "Action Needed";
-        else if(final < 85) status.innerText = "Looking Good";
+        if(final < 50) status.innerText = "Focus Needed";
+        else if(final < 85) status.innerText = "Healthy Site";
         else status.innerText = "SEO & AI Authority!";
-        localStorage.setItem('audit_final_v4', JSON.stringify(Array.from(inputs).map(i => i.value)));
+        localStorage.setItem('audit_final_all', JSON.stringify(Array.from(inputs).map(i => i.value)));
     }
 
     function exportReport() {
         const score = document.getElementById('mainGauge').getAttribute('data-val');
-        let report = `SEO & AI AUDIT REPORT\nSource: akvarellskiss.se\nDate: ${new Date().toLocaleDateString()}\n------------------------------\nTOTAL SCORE: ${score}/100\n------------------------------\n\nMETRICS:\n`;
-        document.querySelectorAll('.tool-card').forEach(c => {
-            const name = c.querySelector('.tool-name').innerText;
-            const inputs = c.querySelectorAll('.score-input');
-            inputs.forEach(i => {
-                const label = i.previousElementSibling && i.previousElementSibling.classList.contains('view-label') ? i.previousElementSibling.innerText : "Value";
-                report += `${name} [${label}]: ${i.value || 0}/100\n`;
-            });
-        });
+        let report = `SEO & AI AUDIT REPORT - akvarellskiss.se\nTotal Score: ${score}/100\nDate: ${new Date().toLocaleDateString()}\n`;
         const blob = new Blob([report], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `SEO-Audit-Report.txt`;
-        a.click();
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `SEO-Report.txt`; a.click();
     }
 
-    function clearData() { if(confirm("Reset all data?")) { localStorage.clear(); location.reload(); } }
-
     window.onload = () => {
-        const saved = JSON.parse(localStorage.getItem('audit_final_v4'));
-        if(saved) {
-            const inputs = document.querySelectorAll('.score-input');
-            saved.forEach((v, i) => { if(inputs[i]) inputs[i].value = v; });
-            calculate();
-        }
+        const saved = JSON.parse(localStorage.getItem('audit_final_all'));
+        if(saved) { document.querySelectorAll('.score-input').forEach((v, i) => { if(saved[i]) v.value = saved[i]; }); calculate(); }
     };
 </script>
 </body>
